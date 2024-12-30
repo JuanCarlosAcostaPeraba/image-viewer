@@ -26,10 +26,38 @@ public class ImagePanel extends JPanel implements ImageDisplay {
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(image, offset, 0, getWidth(), getHeight(), null); // Escala la imagen actual
-        if (offset == 0) return;
-        int x = offset > 0 ? -(futureImage.getWidth() - offset) : offset + image.getWidth();
-        g.drawImage(futureImage, x, 0, getWidth(), getHeight(), null);
+        super.paint(g);
+
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, getWidth(), getHeight());
+
+        if (image != null) {
+            int imgWidth = image.getWidth();
+            int imgHeight = image.getHeight();
+            double imgAspect = (double) imgWidth / imgHeight;
+            double panelAspect = (double) getWidth() / getHeight();
+
+            int drawWidth, drawHeight;
+            if (imgAspect > panelAspect) {
+                drawWidth = getWidth();
+                drawHeight = (int) (getWidth() / imgAspect);
+            } else {
+                drawHeight = getHeight();
+                drawWidth = (int) (getHeight() * imgAspect);
+            }
+
+            int x = (getWidth() - drawWidth) / 2;
+            int y = (getHeight() - drawHeight) / 2;
+
+            g.drawImage(image, x + offset, y, drawWidth, drawHeight, null);
+
+            if (offset != 0 && futureImage != null) {
+                int futureX = offset > 0
+                        ? x - drawWidth + offset
+                        : x + drawWidth + offset;
+                g.drawImage(futureImage, futureX, y, drawWidth, drawHeight, null);
+            }
+        }
     }
 
     private void reset() {
