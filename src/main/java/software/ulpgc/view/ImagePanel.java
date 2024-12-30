@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class ImagePanel extends JPanel implements ImageDisplay{
+public class ImagePanel extends JPanel implements ImageDisplay {
     private String current;
     private String future;
     private BufferedImage image;
@@ -26,10 +26,10 @@ public class ImagePanel extends JPanel implements ImageDisplay{
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(image, offset, 0, null);
+        g.drawImage(image, offset, 0, getWidth(), getHeight(), null); // Escala la imagen actual
         if (offset == 0) return;
-        int x = offset > 0 ? -(futureImage.getWidth()-offset) : offset+image.getWidth();
-        g.drawImage(futureImage, x, 0, null);
+        int x = offset > 0 ? -(futureImage.getWidth() - offset) : offset + image.getWidth();
+        g.drawImage(futureImage, x, 0, getWidth(), getHeight(), null);
     }
 
     private void reset() {
@@ -37,14 +37,14 @@ public class ImagePanel extends JPanel implements ImageDisplay{
         repaint();
     }
 
-    private void toggle(){
+    private void toggle() {
         current = future;
         image = futureImage;
         offset = 0;
         repaint();
     }
 
-    private void setOffset (int offset) {
+    private void setOffset(int offset) {
         this.offset = offset;
         if (offset < 0) setFuture(shift.right());
         if (offset > 0) setFuture(shift.left());
@@ -58,14 +58,14 @@ public class ImagePanel extends JPanel implements ImageDisplay{
         repaint();
     }
 
-    public void setFuture (String name) {
-        if(name.equals(future)) return;
+    public void setFuture(String name) {
+        if (name.equals(future)) return;
         this.future = name;
         this.futureImage = load(name);
     }
 
-    private BufferedImage load(String name){
-        try{
+    private BufferedImage load(String name) {
+        try {
             return ImageIO.read(new File(name));
         } catch (IOException ex) {
             System.out.println("Can´t load " + name);
@@ -74,12 +74,12 @@ public class ImagePanel extends JPanel implements ImageDisplay{
     }
 
     @Override
-    public void on(Shift shift){
+    public void on(Shift shift) {
         this.shift = shift;
     }
 
     @Override
-    public String current(){
+    public String current() {
         return this.current;
     }
 
@@ -97,7 +97,7 @@ public class ImagePanel extends JPanel implements ImageDisplay{
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            if(Math.abs(offset) > getWidth() / 2)
+            if (Math.abs(offset) > getWidth() / 2)
                 toggle();
             else
                 reset();
