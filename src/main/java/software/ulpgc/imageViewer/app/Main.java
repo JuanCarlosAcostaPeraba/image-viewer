@@ -1,10 +1,10 @@
-package software.ulpgc.app;
+package software.ulpgc.imageViewer.app;
 
-import software.ulpgc.model.Image;
-import software.ulpgc.presenter.ImagePresenter;
-import software.ulpgc.view.FileImageLoader;
-import software.ulpgc.view.ImageDisplay;
-import software.ulpgc.view.ImagePanel;
+import software.ulpgc.imageViewer.model.Image;
+import software.ulpgc.imageViewer.presenter.ImagePresenter;
+import software.ulpgc.imageViewer.view.FileImageLoader;
+import software.ulpgc.imageViewer.view.ImageDisplay;
+import software.ulpgc.imageViewer.view.ImagePanel;
 
 import javax.swing.*;
 import java.io.File;

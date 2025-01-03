@@ -1,15 +1,18 @@
-package software.ulpgc.view;
+package software.ulpgc.imageViewer.view;
 
 public interface ImageDisplay {
-    void display(String name) ;
+    void display(String name);
+
     String current();
+
     void on(Shift shift);
 
     interface Shift {
         String left();
+
         String right();
 
-        public static class Null implements Shift{
+        public static class Null implements Shift {
 
             public Null() {
             }

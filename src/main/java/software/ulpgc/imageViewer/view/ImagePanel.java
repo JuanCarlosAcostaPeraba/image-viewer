@@ -1,4 +1,4 @@
-package software.ulpgc.view;
+package software.ulpgc.imageViewer.view;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

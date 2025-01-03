@@ -1,4 +1,4 @@
-package software.ulpgc.model;
+package software.ulpgc.imageViewer.model;
 
 public class Image {
     private final String name;
